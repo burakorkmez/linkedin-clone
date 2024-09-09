@@ -18,7 +18,7 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 		enabled: !isOwnProfile,
 	});
 
-	const isConnected = userData.connections.some((connection) => connection._id === authUser._id);
+	const isConnected = userData.connections.some((connection) => connection === authUser._id);
 
 	const { mutate: sendConnectionRequest } = useMutation({
 		mutationFn: (userId) => axiosInstance.post(`/connections/request/${userId}`),

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { axiosInstance } from "../lib/axios";
 import { toast } from "react-hot-toast";
 
@@ -68,11 +68,11 @@ const ProfileHeader = ({ userData, onSave, isOwnProfile }) => {
 		},
 	});
 
-	const getConnectionStatus = () => {
+	const getConnectionStatus = useMemo(() => {
 		if (isConnected) return "connected";
 		if (!isConnected) return "not_connected";
 		return connectionStatus?.data?.status;
-	};
+	}, [isConnected, connectionStatus]);
 
 	const renderConnectionButton = () => {
 		const baseClass = "text-white py-2 px-4 rounded-full transition duration-300 flex items-center justify-center";
